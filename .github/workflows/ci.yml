@@ -40,6 +40,9 @@ jobs:
       - name: list files
         run: ls -la
 
+      - name: Go format
+        run: test -z $(go fmt ./...)
+
       - name: Install staticcheck
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
