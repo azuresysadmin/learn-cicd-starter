@@ -1,0 +1,22 @@
+name: cd # The name of the pipeline
+
+on: # Decides what the trigger for the pipeline should be. Pull requests from feature branch to main
+  push:
+    branches: [main]
+
+jobs:
+  deploy: # The name of the first job
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code # Checks out the code in the repository to the runner (agent)
+        uses: actions/checkout@v4
+
+      - name: Set up Go # Installs Go on the runner with a selected version
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.0"
+
+      - name: Build the app # Runs the build script to build the application
+        run: sh scripts/buildprod.sh
